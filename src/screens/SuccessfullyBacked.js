@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, Textarea } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import CustomButton from "../common/CustomButton";
 import { logo } from "../svg";
 import success from '../images/success.svg';

@@ -24,7 +24,7 @@ const Home = ({ handleClick, supportProject, connectWallet }) => {
                     <Text fontWeight="400" color="brand.dark" fontSize="65px">project to live</Text>
                     <Flex mt="20px">
                         <CustomButton bg="brand.primary" mr="20px" color="brand.white" hoverColor="brand.dark" onClick={connectWallet}>Connect Wallet</CustomButton>
-                        <CustomButton bg="none" border="1px solid #23D186" color="brand.dark" hoverColor="brand.primary" onClick={supportProject}>Support a Project</CustomButton>
+                        <CustomButton bg="none" border="1px solid #23D186" color="brand.dark" hoverColor="brand.primary" onClick={supportProject}>Back a Project</CustomButton>
                     </Flex>
                 </Box>
                 <Box>

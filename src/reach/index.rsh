@@ -1,27 +1,60 @@
+/* eslint-disable no-undef */
 'reach 0.1';
 
 const common = {
-  ...hasRandom,
-  test: Fun([], Null)
-}
-export const main = Reach.App(() => {
-  const Deployer =  Participant('Deployer', {
-    ...common,
-  });
-  const Attacher = Participant('Attacher', {
-    ...common
-  });
+  funded: Fun([], Null),
+  ready : Fun([], Null),
+  recvd : Fun([UInt], Null) };
 
-  init();
+export const main =
+  Reach.App(
+    {},
+    [ Participant('Funder', {
+      ...common,
+      getParams: Fun([], Object({
+        receiverAddr: Address,
+        payment:      UInt,
+        maturity:     UInt,
+        refund:       UInt,
+        dormant:      UInt })) }),
+      Participant('Receiver', common),
+      Participant('Bystander', common) ],
+    (Funder, Receiver, Bystander) => {
+      Funder.only(() => {
+        const { receiverAddr,
+                payment, maturity, refund, dormant }
+              = declassify(interact.getParams()); });
+      Funder.publish(
+        receiverAddr,
+        payment, maturity, refund, dormant )
+        .pay(payment);
+      Receiver.set(receiverAddr);
+      commit();
 
-  Deployer.publish();
-  commit();
+      each([Funder, Receiver, Bystander], () => {
+        interact.funded(); });
+      wait(relativeTime(maturity));
 
-  Attacher.publish();
-  commit();
+      const giveChance = (Who, then) => {
+        Who.only(() => interact.ready());
 
-  Attacher.interact.test();
-  Deployer.interact.test();
+        if ( then ) {
+          Who.publish()
+            .timeout(relativeTime(then.deadline), () => then.after()); }
+        else {
+          Who.publish(); }
 
-  exit(); 
-})
+        transfer(payment).to(Who);
+        commit();
+        Who.only(() => interact.recvd(payment));
+        exit(); };
+
+      giveChance(
+        Receiver,
+        { deadline: refund,
+          after: () =>
+          giveChance(
+            Funder,
+            { deadline: dormant,
+              after: () =>
+              giveChance(Bystander, false) }) }); });

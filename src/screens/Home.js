@@ -3,7 +3,7 @@ import CustomButton from "../common/CustomButton";
 import { logo } from "../svg";
 import bg from '../images/bg.png';
 
-const Home = ({ handleClick, supportProject }) => {
+const Home = ({ handleClick, supportProject, connectWallet }) => {
     return (
         <Box m="27px 70px">
             <Flex alignItems="center" justifyContent="space-between" fontSize="16px">
@@ -23,7 +23,7 @@ const Home = ({ handleClick, supportProject }) => {
                     <Text color="brand.primary" fontSize="100px" lineHeight="108px" fontWeight="700">Creatives</Text>
                     <Text fontWeight="400" color="brand.dark" fontSize="65px">project to live</Text>
                     <Flex mt="20px">
-                        <CustomButton bg="brand.primary" mr="20px" color="brand.white" hoverColor="brand.dark">Connect Wallet</CustomButton>
+                        <CustomButton bg="brand.primary" mr="20px" color="brand.white" hoverColor="brand.dark" onClick={connectWallet}>Connect Wallet</CustomButton>
                         <CustomButton bg="none" border="1px solid #23D186" color="brand.dark" hoverColor="brand.primary" onClick={supportProject}>Support a Project</CustomButton>
                     </Flex>
                 </Box>

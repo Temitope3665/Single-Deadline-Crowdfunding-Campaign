@@ -2,7 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import bg from '../images/begin-bg.png'
 import projectImg from '../images/project-one.png';
 
-const SelectProject = ({ viewProject }) => {
+const SelectProject = ({ viewProject, accountBal }) => {
     return (
         <Box h="100vh">
             <Flex>
@@ -19,7 +19,7 @@ const SelectProject = ({ viewProject }) => {
                         <Text mr="180px" _hover={{ color: 'brand.primary' }} cursor="pointer">Back a Project</Text>
                         <Flex mr="50px">
                             <Text>Current Bal: </Text>
-                            <Text color="brand.primary" ml="10px">10ETH</Text>
+                            <Text color="brand.primary" ml="10px">{accountBal} ALGO</Text>
                         </Flex>
                     </Flex>
 

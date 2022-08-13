@@ -3,7 +3,7 @@ import CustomButton from "../common/CustomButton";
 import bg from '../images/begin-bg.png'
 import TextInput from "../common/TextInput";
 
-const BackProject = ({ handleBackProject }) => {
+const BackProject = ({ handleBackProject, accountBal }) => {
     return (
         <Box h="100vh">
             <Flex>
@@ -21,7 +21,7 @@ const BackProject = ({ handleBackProject }) => {
                         <Text mr="180px" _hover={{ color: 'brand.primary' }} cursor="pointer">Back a Project</Text>
                         <Flex mr="50px">
                             <Text>Current Bal: </Text>
-                            <Text color="brand.primary" ml="10px">10ETH</Text>
+                            <Text color="brand.primary" ml="10px">{accountBal} ALGO</Text>
                         </Flex>
                     </Flex>
 

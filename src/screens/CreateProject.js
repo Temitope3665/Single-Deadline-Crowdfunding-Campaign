@@ -1,16 +1,21 @@
-import { Box, Flex, Image, SimpleGrid, Text, Textarea } from "@chakra-ui/react";
+import { Box, Flex, FormLabel, Image, SimpleGrid, Spinner, Text, Textarea } from "@chakra-ui/react";
 import CustomButton from "../common/CustomButton";
 import bg from '../images/begin-bg.png'
 import TextInput from "../common/TextInput";
 import { useState } from "react";
 
-const CreateProject = ({ handleCreateProject, accountBal }) => {
+const CreateProject = ({ handleCreateProject, accountBal, setTitle, setAmount, submitting }) => {
     const [email, setEmail] = useState('');
-    const [projectName, setProjectName] = useState('');
     const [userName, setUserName] = useState('');
-    const [amount, setAmount] = useState('');
     const [goal, setGoal] = useState('');
-    const [submitting, setSubmitting] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data = { 
+            email, userName, goal
+        };
+        handleCreateProject(data);
+    }
 
     return (
         <Box h="100vh">
@@ -30,14 +35,14 @@ const CreateProject = ({ handleCreateProject, accountBal }) => {
 
                     <Box mt="80px" mr="50px">
                         <Text fontSize="18px">Fill this form to create a project</Text>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <SimpleGrid columns="2" spacing="5">
-                                <TextInput border="0.5px solid #23D186" placeholder="Input email" type="email" onChange={(e) => setEmail(e.target.value)} />
-                                <TextInput border="0.5px solid #23D186" placeholder="Input project name" type="text" onChange={(e) => setProjectName(e.target.value)} />
+                                <TextInput border="0.5px solid #23D186" label="Email" placeholder="Input email" type="email" onChange={(e) => setEmail(e.target.value)} />
+                                <TextInput border="0.5px solid #23D186" label="Project Name" placeholder="Input project name" type="text" onChange={(e) => setTitle(e.target.value)} />
                             </SimpleGrid>
                             <SimpleGrid columns="2" spacing="10">
-                                <TextInput border="0.5px solid #23D186" placeholder="Input user name" type="text" onChange={(e) => setUserName(e.target.value)} />
-                                <TextInput border="0.5px solid #23D186" placeholder="Amount to be raised" type="number" onChange={(e) => setAmount(e.target.value)} />
+                                <TextInput border="0.5px solid #23D186" label="User Name"  placeholder="Input user name" type="text" onChange={(e) => setUserName(e.target.value)} />
+                                <TextInput border="0.5px solid #23D186" label="Amount (ALGO)" placeholder="Amount to be raised in ALGO" type="number" onChange={(e) => setAmount(e.target.value)} />
                             </SimpleGrid>
                             <Textarea _focus={{ border: "0.5px solid #23D186" }} h="200px" w="100%" mt="20px" placeholder="Goal of the project" onChange={(e) => setGoal(e.target.value)} />
                             <CustomButton
@@ -46,11 +51,11 @@ const CreateProject = ({ handleCreateProject, accountBal }) => {
                                 bg="brand.primary"
                                 hoverColor="brand.dark"
                                 color="brand.white"
-                                disabled={!email || !projectName || !userName || !amount || !goal}
-                                onClick={handleCreateProject}
-                                >
-                                    Create Project
-                                </CustomButton>
+                                disabled={!email || !userName || !goal}
+                                isLoading={submitting}
+                            >
+                                Create Project
+                            </CustomButton>
                         </form>
                     </Box>
 

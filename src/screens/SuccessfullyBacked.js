@@ -3,7 +3,7 @@ import CustomButton from "../common/CustomButton";
 import { logo } from "../svg";
 import success from '../images/success.svg';
 
-const SuccessfullyBacked = ({ handleGoHome }) => {
+const SuccessfullyBacked = ({ handleGoHome, reportMsg, newBalance }) => {
     return (
         <Box m="27px 70px">
             <Flex alignItems="center" justifyContent="space-between" fontSize="16px">
@@ -22,9 +22,10 @@ const SuccessfullyBacked = ({ handleGoHome }) => {
                 <Box>
                     <Image src={success} alt="success" />
                     <Text color="brand.primary" textAlign="center" mt="50px" fontWeight="700">Congratulations!</Text>
-                    <Text textAlign="center" fontSize="16px" mt="10px">You’ve successfully backed this project.
+                    <Text textAlign="center" fontSize="16px" mt="10px">{reportMsg}
                         <br/>Watch our space more often to know the progress<br/>of your backed project.
                     </Text>
+                    <Text>Your new balance is ${newBalance}</Text>
                     <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.primary" onClick={handleGoHome}>Go Home</CustomButton>
                 </Box>
             </Flex>

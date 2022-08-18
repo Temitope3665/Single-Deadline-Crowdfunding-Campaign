@@ -12,7 +12,7 @@ const Home = ({ handleClick, supportProject, connectWallet }) => {
                     <Text ml="87px" cursor="pointer">Discover</Text>
                 </Flex>
                 <Flex alignItems="center">
-                    <Text cursor="pointer" mr="87px" _hover={{ color: 'brand.primary' }}>Back a Project</Text>
+                    <Text cursor="pointer" mr="87px" _hover={{ color: 'brand.primary' }} onClick={supportProject}>Back a Project</Text>
                     <CustomButton w="140px" bg="brand.primary" hoverColor="brand.dark" color="brand.white" onClick={handleClick}>Create Project</CustomButton>
                 </Flex>
             </Flex>

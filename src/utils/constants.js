@@ -7,6 +7,7 @@ export const views = {
   PROJECT_DETAILS: 'Project details',
   BACK_PROJECT: 'Back project',
   SUCCESS_BACKED: 'Back project success',
+  CREATOR_RESPONSE: 'Creator response',
 
   //Deployer
   DEPLOYING: 'Deploying',

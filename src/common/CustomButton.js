@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 
-const CustomButton = ({ children, disabled, bg, color, onClick, border, h, mr, hover, w, mt, hoverColor }) => (
+const CustomButton = ({ children, disabled, bg, color, onClick, border, h, mr, hover, w, mt, hoverColor, isLoading }) => (
   <Button
     w={w || "170px"}
     h={h || "55px"}
@@ -17,6 +17,7 @@ const CustomButton = ({ children, disabled, bg, color, onClick, border, h, mr, h
     cursor="pointer"
     type="submit"
     _disabled={{ bg: 'rgba(35, 209, 134, 0.25)', cursor: 'not-allowed', color: 'rgba(0, 0, 0, 0.2)', _hover: { color: 'rgba(0, 0, 0, 0.2)' } }}
+    isLoading={isLoading}
   >
     {children}
   </Button>

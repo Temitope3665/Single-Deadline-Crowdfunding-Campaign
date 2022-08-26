@@ -1,16 +1,9 @@
 import "./App.css";
-import { loadStdlib, ask } from "@reach-sh/stdlib";
+import { loadStdlib } from "@reach-sh/stdlib";
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from "@reach-sh/stdlib";
 import * as backend from "./reach/build/index.main.mjs";
 import { useRef, useState } from "react";
-import { views, Loader } from "./utils/";
-import {
-  ConnectAccount,
-  PasteContractInfo,
-  SelectRole,
-  TestView,
-  WaitForAttacher,
-} from "./screens";
+import { views } from "./utils/";
 import Home from "./screens/Home";
 import CreateProject from "./screens/CreateProject";
 import SuccessfulCreation from "./screens/SuccessfulCreation";
@@ -25,16 +18,14 @@ const reach = loadStdlib("ALGO");
 reach.setWalletFallback(
   reach.walletFallback({ providerEnv: "TestNet", MyAlgoConnect })
 );
-const fmt = (x) => reach.formatCurrency(x, 4);
 
 function App() {
   const [view, setView] = useState(views.CONNECT_ACCOUNT);
   const [accountBal, setAccountBal] = useState(0);
   const [account, setAccount] = useState({});
-  const [accountAddress, setAccountAddress] = useState("");
   const [createProjectRes, setCreateProjectRes] = useState("");
   const [contractInfo, setContractInfo] = useState({});
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("")
   const [projectTitle, setProjectTitle] = useState('');
   const [projectCost, setProjectCost] = useState();
   const [contractDetails, setContractDetails] = useState({});
@@ -47,17 +38,15 @@ function App() {
   const [backedProjectCost, setBackedProjectCost] = useState('');
   const [reportMsg, setReportMsg] = useState('');
   const [funderCost, setFunderCost] = useState(0);
+  const [displayBal, setDisplayBal] = useState(false);
 
   const balance = useRef();
-
-  const numOfFunders = 3;
 
   // Connect wallet
   const connectWallet = async () => {
     const getAccount = async () => {
       try {
         account.current = await reach.getDefaultAccount();
-        setAccountAddress(account.current.networkAccount.addr);
         setAccount(account)
         toaster.success(`Account connected successfully`)
         console.log("Account :" + account.current.networkAccount.addr);
@@ -88,14 +77,46 @@ function App() {
     }
   };
 
+  const getBalance = async (e) => {
+    e.preventDefault();
+    setDisplayBal(true);
+    const getAccount = async () => {
+      try {
+        account.current = await reach.getDefaultAccount();
+        setAccount(account)
+        toaster.success(`New balance successfully fetched`)
+        console.log("Account :" + account.current.networkAccount.addr);
+      } catch (err) {
+        toaster.danger(`Error occured, can't retrieve your account`)
+      }
+    };
+
+    const getBalance = async () => {
+      try {
+        let rawBalance = await reach.balanceOf(account.current);
+        balance.current = reach.formatCurrency(rawBalance, 4);
+        setAccountBal(balance.current);
+      } catch (err) {
+        toaster.danger('Error occured')
+      }
+    };
+
+    try {
+      await getAccount();
+      await getBalance();
+    } catch (err) {
+      toaster.danger('Error occured')
+      console.log(err);
+    }
+  }
+
   const commonInteract = (role) => ({
     reportTransfer: (payment) => { console.log(`The contract paid ${toSU(payment)} ${suStr} to ${role === 'Receiver' ? 'you' : 'the Receiver'}`); },
     reportCancellation: () => toaster.danger('Project has been cancelled'),
     reportPayment: (payment) => { 
-      setReportMsg(`${role === 'Funder' ? 'You' : 'A Supporter'} paid ${toSU(payment)} ${suStr} to the contract.`)
+      setReportMsg(`${role === 'Funder' ? 'You' : 'A Supporter'} paid ${toSU(payment)} ${suStr} to back a project.`)
       setView(views.SUCCESS_BACKED);
       setView(views.CREATOR_RESPONSE);
-      console.log(`${role === 'Funder' ? 'You' : 'A Supporter'} paid ${toSU(payment)} ${suStr} to the contract.`);
      }
   });
 
@@ -109,7 +130,6 @@ function App() {
           ...commonInteract(user),
           projectCost: toAU(projectCost),
           project: projectTitle,
-          // deadline: 5,
           reportReady: async (projectCost) => {
             setCreateProjectRes(`Your ${projectTitle} is up for support at ${toSU(projectCost)} ${suStr}`)
             setContractInfo(`${JSON.stringify(await ctc.getInfo())}`)
@@ -126,7 +146,6 @@ function App() {
       }
     } else {
       setFunderResponse(true);
-      console.log(funderResponse)
       try {
         setSubmitting(true);
         const funderInteract = {
@@ -151,12 +170,6 @@ function App() {
 
     }
   }
-
-  console.log(Number(accountBal));
-
-const setProjectDetailsData = (data) => {
-  console.log(data);
-};
 
 const setPTitle = (title) => {
   setProjectTitle(title);
@@ -183,7 +196,6 @@ const setDetails = (contractDetails) => {
         {view === views.CREATE_PROJECT && (
           <CreateProject
             handleCreateProject={handleProject}
-            setProjectDetailsData={setProjectDetailsData}
             accountBal={accountBal}
             setTitle={setPTitle}
             setAmount={setPCost}
@@ -224,6 +236,9 @@ const setDetails = (contractDetails) => {
             handleGoHome={() => setView(views.CONNECT_ACCOUNT)}
             cost={backedProjectCost}
             reportMsg={reportMsg}
+            getBalance={getBalance}
+            newBalance={accountBal}
+            displayBal={displayBal}
           />
         )}
         {view === views.CREATOR_RESPONSE && (
@@ -231,7 +246,9 @@ const setDetails = (contractDetails) => {
             handleGoHome={() => setView(views.CONNECT_ACCOUNT)}
             reportMsg={reportMsg}
             newBal={accountBal}
+            getBalance={getBalance}
             funderCost={funderCost}
+            displayBal={displayBal}
           />
         )}
       </header>

@@ -2,7 +2,6 @@ import { Box, Flex, Image, Text, Textarea } from "@chakra-ui/react";
 import CustomButton from "../common/CustomButton";
 import bg from "../images/begin-bg.png";
 import TextInput from "../common/TextInput";
-import { useState } from "react";
 
 const BackProject = ({
   handleBackProject,

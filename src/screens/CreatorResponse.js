@@ -3,7 +3,7 @@ import CustomButton from "../common/CustomButton";
 import { logo } from "../svg";
 import success from '../images/success.svg';
 
-const CreatorResponse = ({ handleGoHome, reportMsg, newBal, funderCost }) => {
+const CreatorResponse = ({ handleGoHome, reportMsg, newBal, getBalance, displayBal }) => {
     return (
         <Box m="27px 70px">
             <Flex alignItems="center" justifyContent="space-between" fontSize="16px">
@@ -25,7 +25,10 @@ const CreatorResponse = ({ handleGoHome, reportMsg, newBal, funderCost }) => {
                     <Text textAlign="center" fontSize="16px" mt="10px">
                         {reportMsg}
                     </Text>
-                    <Text color="brand.primary" fontWeight="700" textAlign="center">Your new balance is {Number(newBal) + Number(funderCost)}</Text>
+                    <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.dark" onClick={getBalance}>Get New Balace</CustomButton>
+                    {displayBal &&
+                        <Text color="brand.primary" fontWeight="700" textAlign="center">Your new balance is ${newBal}</Text>
+                    }
                     <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.primary" onClick={handleGoHome}>Go Home</CustomButton>
                 </Box>
             </Flex>

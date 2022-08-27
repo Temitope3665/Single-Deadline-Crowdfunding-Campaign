@@ -15,7 +15,7 @@ const BackProject = ({
     <Box h="100vh">
       <Flex display={{ base: 'block', lg: 'flex' }}>
         <Box width={{ base: '100%', lg: "45%"}}>
-          <Image h={{ base: '', lg: "100vh"}} width={{ base: '100%', lg: '70%' }} objectFit="cover" src={bg} alt="bg" pos="relative" />
+          <Image h={{ base: '', lg: "100vh"}} width={{ base: '100%', lg: '900px' }} objectFit="cover" src={bg} alt="bg" pos="relative" />
           <Text
             color="brand.white"
             ml={{ base: '20px', lg: "70px"}}

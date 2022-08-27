@@ -28,7 +28,7 @@ const SuccessfullyBacked = ({ handleGoHome, reportMsg, newBalance, getBalance, d
 
                     <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.dark" onClick={getBalance}>Get New Balance</CustomButton>
                     {displayBal &&
-                        <Text color="brand.primary" fontWeight="700" textAlign="center">Your new balance is ${newBalance}</Text>
+                        <Text color="brand.primary" fontWeight="700" mt="30px" textAlign="center">Your new balance is {newBalance} ALGO</Text>
                     }
                     <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.primary" onClick={handleGoHome}>Go Home</CustomButton>
                 </Box>

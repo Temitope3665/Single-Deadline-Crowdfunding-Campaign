@@ -8,4 +8,5 @@ export const views = {
   BACK_PROJECT: 'Back project',
   SUCCESS_BACKED: 'Back project success',
   CREATOR_RESPONSE: 'Creator response',
+  WAITING_BACKED: 'Waiting for people to back the project'
 }

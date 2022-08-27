@@ -13,6 +13,7 @@ import BackProject from "./screens/BackProject";
 import SuccessfullyBacked from "./screens/SuccessfullyBacked";
 import { toaster } from "evergreen-ui";
 import CreatorResponse from "./screens/CreatorResponse";
+import WaitingOthers from "./screens/WaitingOthers";
 
 const reach = loadStdlib("ALGO");
 reach.setWalletFallback(
@@ -79,7 +80,6 @@ function App() {
 
   const getBalance = async (e) => {
     e.preventDefault();
-    setDisplayBal(true);
     const getAccount = async () => {
       try {
         account.current = await reach.getDefaultAccount();
@@ -96,6 +96,7 @@ function App() {
         let rawBalance = await reach.balanceOf(account.current);
         balance.current = reach.formatCurrency(rawBalance, 4);
         setAccountBal(balance.current);
+        setDisplayBal(true);
       } catch (err) {
         toaster.danger('Error occured')
       }
@@ -208,6 +209,7 @@ const setDetails = (contractDetails) => {
             contractInfo={contractInfo}
             accountBal={accountBal}
             goHome={(e) => { setView(views.CONNECT_ACCOUNT); e.preventDefault(); }}
+            handleWait={() => setView(views.WAITING_BACKED)}
           />
         )}
         {view === views.SELECT_PROJECT && (
@@ -249,6 +251,11 @@ const setDetails = (contractDetails) => {
             getBalance={getBalance}
             funderCost={funderCost}
             displayBal={displayBal}
+          />
+        )}
+        {view === views.WAITING_BACKED && (
+          <WaitingOthers
+            accountBal={accountBal}
           />
         )}
       </header>

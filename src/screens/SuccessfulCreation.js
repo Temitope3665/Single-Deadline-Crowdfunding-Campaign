@@ -5,7 +5,7 @@ import success from '../images/success.svg';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { toaster } from "evergreen-ui";
 
-const SuccessfulCreation = ({ contractInfo, successMsg, accountBal, goHome }) => {
+const SuccessfulCreation = ({ contractInfo, successMsg, accountBal, goHome, handleWait }) => {
     return (
         <Box m={{ base: "27px 20px", lg: "27px 70px" }}>
             <Flex alignItems="center" justifyContent="space-between" fontSize="16px">
@@ -32,7 +32,7 @@ const SuccessfulCreation = ({ contractInfo, successMsg, accountBal, goHome }) =>
                     </Text>
                     <Textarea mt="20px" readOnly border="1px solid #23D186" value={contractInfo} />
                     <CopyToClipboard text={contractInfo} onCopy={() => toaster.success("contract Info copied successfully")}>
-                        <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.primary">Copy to clipboard</CustomButton>
+                        <CustomButton mt="20px" w="100%" bg="none" h="50px" border="1px solid #23D186" color="brand.primary" onClick={handleWait}>Copy to clipboard</CustomButton>
                     </CopyToClipboard>
                 </Box>
             </Flex>

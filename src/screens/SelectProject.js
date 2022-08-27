@@ -39,7 +39,7 @@ const SelectProject = ({ viewProject, accountBal }) => {
                 </Box>
             </Flex>
         </Box>
-    )
-}
+    );
+};
 
 export default SelectProject;

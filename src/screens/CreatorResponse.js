@@ -33,7 +33,7 @@ const CreatorResponse = ({ handleGoHome, reportMsg, newBal, getBalance, displayB
                 </Box>
             </Flex>
         </Box>
-    )
-}
+    );
+};
 
 export default CreatorResponse;

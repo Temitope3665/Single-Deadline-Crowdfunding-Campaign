@@ -5,14 +5,14 @@ import success from '../images/success.svg';
 
 const CreatorResponse = ({ handleGoHome, reportMsg, newBal, getBalance, displayBal }) => {
     return (
-        <Box m="27px 70px">
+        <Box m={{ base: "27px 20px", lg: "27px 70px" }}>
             <Flex alignItems="center" justifyContent="space-between" fontSize="16px">
                 <Flex alignItems="center">
                     <Box cursor="pointer">{logo}</Box>
-                    <Text ml="87px" cursor="pointer">Discover</Text>
+                    <Text ml="87px" display={{ base: 'none', lg: 'block' }} cursor="pointer">Discover</Text>
                 </Flex>
                 <Flex alignItems="center">
-                    <Text cursor="pointer" mr="87px" _hover={{ color: 'brand.primary' }}>Back a Project</Text>
+                    <Text cursor="pointer" mr={{ base: '20px', lg: "87px"}} _hover={{ color: 'brand.primary' }}>Back a Project</Text>
                     <CustomButton w="140px" bg="brand.primary" hoverColor="brand.dark" color="brand.white">Create Project</CustomButton>
                 </Flex>
             </Flex>

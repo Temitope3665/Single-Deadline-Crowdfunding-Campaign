@@ -1,4 +1,13 @@
 import { extendTheme } from '@chakra-ui/react';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
+
+const breakpoints = createBreakpoints({
+  sm: '320px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1200px',
+  xxl: '1441px',
+});
 
 const colors = {
     brand: {
@@ -22,6 +31,6 @@ const colors = {
       },
   };
 
-const theme = extendTheme({ colors, styles, fonts });
+const theme = extendTheme({ colors, styles, fonts, breakpoints });
 
 export default theme;

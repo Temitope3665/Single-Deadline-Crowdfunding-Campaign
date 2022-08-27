@@ -7,21 +7,19 @@ import { toaster } from "evergreen-ui";
 
 const SuccessfulCreation = ({ contractInfo, successMsg, accountBal, goHome }) => {
     return (
-        <Box m="27px 70px">
+        <Box m={{ base: "27px 20px", lg: "27px 70px" }}>
             <Flex alignItems="center" justifyContent="space-between" fontSize="16px">
                 <Flex alignItems="center">
                     <Box cursor="pointer" onClick={goHome}>{logo}</Box>
-                    <Text ml="87px" cursor="pointer">Discover</Text>
+                    <Text ml={{ base: '0', lg: "87px"}} cursor="pointer">Discover</Text>
                 </Flex>
-                <Flex alignItems="center">
-                    <Flex fontSize="16px" mt="35px" justifyContent="right" fontWeight="700">
-                            <Text mr="180px" _hover={{ color: 'brand.primary' }} cursor="pointer">Back a Project</Text>
-                            <Flex mr="50px">
+                    <Flex fontSize="16px" justifyContent={{ base: 'space-between', lg: "right"}} fontWeight="700">
+                            <Text mr={{ base: '0', lg: "180px"}} display={{ base: 'none', lg: 'block' }}  _hover={{ color: 'brand.primary' }} cursor="pointer">Back a Project</Text>
+                            <Flex mr={{ base: '0', lg: "50px"}}>
                                 <Text>Current Bal: </Text>
                                 <Text color="brand.primary" ml="10px">{accountBal} ALGO</Text>
                             </Flex>
-                        </Flex>
-                </Flex>
+                    </Flex>
             </Flex>
 
 

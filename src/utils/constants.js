@@ -8,16 +8,4 @@ export const views = {
   BACK_PROJECT: 'Back project',
   SUCCESS_BACKED: 'Back project success',
   CREATOR_RESPONSE: 'Creator response',
-
-  //Deployer
-  DEPLOYING: 'Deploying',
-  WAIT_FOR_ATTACHER: 'Wait for attacher',
-  
-  //Attacher
-  PASTE_CONTRACT_INFO: 'Paste contract info',
-  ATTACHING: 'Attaching',
-
-  //GENERIC
-  TIME_OUT: 'Timeout',
-  TEST_VIEW: 'Test view'
 }

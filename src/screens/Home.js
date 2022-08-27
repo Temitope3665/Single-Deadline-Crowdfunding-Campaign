@@ -32,7 +32,7 @@ const Home = ({ handleClick, supportProject, connectWallet }) => {
                 </Box>
             </Box>
         </Box>
-    )
-}
+    );
+};
 
 export default Home;

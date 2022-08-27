@@ -34,11 +34,11 @@ const CreateProject = ({
 
   return (
     <Box h="100vh">
-      <Flex w="100%">
-        <Box w="45%">
+      <Flex w="100%" display={{ base: 'block', lg: 'flex' }}>
+        <Box width={{ base: '100%', lg: "45%"}}>
           <Image
-            w="550px"
-            h="100vh"
+            w={{ base: '100%', lg: "550px"}}
+            h={{ base: '', lg: "100vh"}}
             objectFit="cover"
             src={bg}
             alt="bg"
@@ -50,18 +50,19 @@ const CreateProject = ({
             fontWeight="700"
             fontSize="70px"
             pos="absolute"
-            top="40%"
+            top={{ base: '15%', lg: "30%"}}
             lineHeight="80px"
           >
             Let’s get you
             <br /> started
           </Text>
         </Box>
-        <Box w="55%">
+        <Box width={{ base: "100%", lg: '55%'}} ml="80px">
           <Flex
             fontSize="16px"
             mt="35px"
-            justifyContent="right"
+            justifyContent={{ base: 'space-between', lg: "right" }}
+            p={{ base: '20px', lg: '' }}
             fontWeight="700"
           >
             <Text
@@ -79,7 +80,7 @@ const CreateProject = ({
             </Flex>
           </Flex>
 
-          <Box mt="80px" mr="50px">
+          <Box mt={{ base: '20px', lg: "80px"}} mr={{ base: '20px', lg: "50px" }} ml={{ base: "20px", lg: ''}}>
             <Text fontSize="18px">Fill this form to create a project</Text>
             <form onSubmit={handleSubmit}>
               <SimpleGrid columns="2" spacing="5">

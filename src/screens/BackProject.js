@@ -13,16 +13,16 @@ const BackProject = ({
 }) => {
   return (
     <Box h="100vh">
-      <Flex>
-        <Box w="45%">
-          <Image h="100vh" src={bg} alt="bg" pos="relative" />
+      <Flex display={{ base: 'block', lg: 'flex' }}>
+        <Box width={{ base: '100%', lg: "45%"}}>
+          <Image h={{ base: '', lg: "100vh"}} width={{ base: '100%', lg: '70%' }} objectFit="cover" src={bg} alt="bg" pos="relative" />
           <Text
             color="brand.white"
-            ml="70px"
+            ml={{ base: '20px', lg: "70px"}}
             fontWeight="700"
-            fontSize="70px"
+            fontSize={{ base: '50px', lg: "70px"}}
             pos="absolute"
-            top="30%"
+            top={{ base: '15%', lg: "30%"}}
             lineHeight="80px"
           >
             How much
@@ -34,21 +34,22 @@ const BackProject = ({
             project
           </Text>
         </Box>
-        <Box w="55%">
+        <Box width={{ base: "100%", lg: '55%'}} ml={{ base: '', lg: "80px"}}>
           <Flex
             fontSize="16px"
             mt="35px"
-            justifyContent="right"
+            justifyContent={{ base: 'space-between', lg: "right" }}
+            p={{ base: '20px', lg: '' }}
             fontWeight="700"
           >
             <Text
-              mr="180px"
+              mr={{ base: '0', lg: "180px"}}
               _hover={{ color: "brand.primary" }}
               cursor="pointer"
             >
               Back a Project
             </Text>
-            <Flex mr="50px">
+            <Flex mr={{ base: '0', lg: "50px"}}>
               <Text>Current Bal: </Text>
               <Text color="brand.primary" ml="10px">
                 {accountBal} ALGO
@@ -56,7 +57,7 @@ const BackProject = ({
             </Flex>
           </Flex>
 
-          <Box mt="80px" mr="50px">
+          <Box mt={{ base: '20px', lg: "80px"}} mr={{ base: '20px', lg: "50px" }} ml={{ base: "20px", lg: ''}}>
             <Text fontSize="18px">Fill this form to create a project</Text>
             <form>
               <TextInput
